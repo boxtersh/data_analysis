@@ -100,3 +100,39 @@ print(f'Для матрицы:\n'
       f'- Сумма значений pH для каждого образца: {sum_ph_col}\n'
       f'- Сумма значений pH всех образцов: {sum_all}\n'
       f'- Дисперсию по образцам с ddof=1: {var_sample}\n')
+
+# Задача 6 ---------------------------------------------------------------------------------------
+
+print('Задача 6')
+consumption = np.array([
+[ 8, 6, 5],   # Mon
+[10, 7, 6],   # Tue
+[ 9, 8, 7],   # Wed
+[11, 10, 9],  # Thu
+[14, 12, 11], # Fri
+[16, 15, 13], # Sat
+[12, 11, 10]  # Sun
+])
+days = np.array(['Mon','Tue','Wed','Thu','Fri','Sat','Sun'])
+houses = np.array(['H1','H2','H3'])
+
+sum_col = consumption.sum(axis=0)
+sum_row = consumption.sum(axis=1)
+avg_col = consumption.mean(axis=1).round(decimals=2)
+max_ind = np.where(sum_row == sum_row.max())[0]
+valid_max_ind = max_ind[max_ind < len(days)]
+day_max = days[valid_max_ind]
+var_col = consumption.var(axis=0, ddof=1).round(decimals=2)
+min_ind = np.where(var_col == var_col.min())[0]
+valid_min_ind = min_ind[min_ind < len(houses)]
+houses_best = houses[valid_min_ind]
+explanation = (f'Вывод: В данном доме наблюдается наименьший разброс значений потребления электроэнергии от\n'
+               f'        среднего значения, что говорит о кучности данных и предсказуемости потребления электроэнергии')
+print(f'Для матрицы:\n'
+      f'{consumption}\n'
+      f'- Общее энергопотребление за неделю для каждого дома: {sum_col}\n'
+      f'- Общее потребление по дням: {sum_row}\n'
+      f'- Среднее энергопотребление в каждом доме: {avg_col}\n'
+      f'- День с наибольшим суммарным потреблением электроэнергии: ',*day_max,'\n'
+      f'- Дисперсия потребления в каждом доме ddof=1: {var_col}\n'
+      f'- Наиболее стабильный дом по потреблению: ',*houses_best,'\n\n',explanation,'\n')
