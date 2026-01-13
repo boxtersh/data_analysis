@@ -1,4 +1,15 @@
 import numpy as np
+import matplotlib.pyplot as plt
+
+def chart_bar(categories, height, xlabel: str='', ylabel: str='', title: str='', label: str=''):
+      colors = ['red', 'green', 'blue']
+      value_axis_x = np.arange(len(categories))
+      plt.bar(value_axis_x, height, color=colors, width=0.3, label=label)
+      plt.xticks(value_axis_x, categories)
+      plt.xlabel(xlabel)
+      plt.ylabel(ylabel)
+      plt.title(title)
+      plt.show()
 
 # Data analysis ДЗ №1
 # Задача 1 ---------------------------------------------------------------------------------------
@@ -136,6 +147,7 @@ print(f'Для матрицы:\n'
       f'- День с наибольшим суммарным потреблением электроэнергии: ',*day_max,'\n'
       f'- Дисперсия потребления в каждом доме ddof=1: ',*var_col,'\n'
       f'- Наиболее стабильный дом по потреблению: ',*houses_best,'\n\n',explanation,'\n')
+chart_bar(houses, sum_col, 'Дома', 'Расход электроэнергии за неделю, кВч', 'Расход электроэнергии по домам')
 
 # Задача 7 ---------------------------------------------------------------------------------------
 
